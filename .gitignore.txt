@@ -1,0 +1,11 @@
+# Ignore build and IDE files
+target/
+.idea/
+*.iml
+*.class
+*.log
+
+# Ignore reports
+reports/
+cucumber-reports/
+surefire-reports/

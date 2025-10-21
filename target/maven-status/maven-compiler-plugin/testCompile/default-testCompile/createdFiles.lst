@@ -1,0 +1,7 @@
+bdd\runners\TestRunner.class
+bdd\utils\DriverFactory.class
+bdd\stepdefinitions\ProdSteps.class
+bdd\pages\ProductPage.class
+bdd\stepdefinitions\LoginSteps.class
+bdd\pages\LoginPages.class
+bdd\base\BaseAllPage.class
