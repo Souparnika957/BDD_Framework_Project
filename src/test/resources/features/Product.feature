@@ -11,12 +11,14 @@ Background:
    When User navigates to the Product page
    And User search for the "Tops"
    When User submits the search
-   Then Get the number of images displayed
-   
-   
+   Then the number of images displayed should be retrieved
+ 
+ Scenario: Verify the product details
+   Given User is on the product page
+   When User searches for the "Tops"
+   And  User submits the product
+   And User clicks on "View product" for the last product
+   Then the product details "Availability:", "Condition:" and "Brand:" and 1400 should be verified.
 
-   
-
-   
    
    
