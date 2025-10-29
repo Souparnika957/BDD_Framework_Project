@@ -18,8 +18,11 @@ public class ProductPage {
 	By prod_search = By.xpath("//input[@id='search_product']");
 	By prod_search_click = By.xpath("//button[@id='submit_search']");
 	By no_of_searchedProds = By.xpath("//div[@class=\"productinfo text-center\"]");
-	
-	
+	By last_product = By.xpath("(//i[@class=\"fa fa-plus-square\"])[last()]");
+	By avail = By.xpath("//p/b[text()='Availability:']");
+	By condi = By.xpath("//p/b[text()='Condition:']");
+	By Brand = By.xpath("//p/b[text()='Brand:']");
+    By Price = By.xpath("//span/span[text()]");
     
 	public ProductPage(WebDriver driver) {
 	        this.driver = driver;
@@ -53,6 +56,31 @@ public class ProductPage {
 		List<WebElement> list = driver.findElements(no_of_searchedProds);
 		return list.size();
 	}
+	
+	public void viewProducts() {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(last_product)).click();
+	}
+	
+	public void viewProdDetails(String expectedAvailability, String expectedCondition, String expectedBrand, String expextedPrice){
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		String actualAvailability = wait.until(ExpectedConditions.visibilityOfElementLocated(avail)).getText();
+		
+		String actualCondition = driver.findElement(condi).getText(); 
+		String actualBrand = driver.findElement(Brand).getText(); 	
+		String actualPrice = driver.findElement(Price).getText();
+		
+		String cleanedPrice = actualPrice.replaceAll("[^0-9]", "").trim();
+		int price = Integer.parseInt(cleanedPrice);
+		
+		String expectedPriceinInt = expextedPrice.replaceAll("[^0-9]", "").trim();
+		int Intprice = Integer.parseInt(expectedPriceinInt);
+		
+		Assert.assertEquals(actualAvailability, expectedAvailability, "Availability Mismatched!");
+		Assert.assertEquals(actualCondition, expectedCondition, "Condition Mismatched!");
+		Assert.assertEquals(actualBrand, expectedBrand, "Brand Mismatched!");
+		Assert.assertEquals(price, Intprice, "Price Mismatched!");	
+	} 
 	
 }
 

@@ -42,26 +42,40 @@ public class ProdSteps {
 	}
 	
 	@When("User navigates to the Product page")
+	@Given("User is on the product page")
 	public void navigates() {
 		productpages.product_click();
 	}
 	
 	   
 	@And("User search for the {string}")
+	@When("User searches for the {string}")
     public void search(String product) {
 	//	System.out.println("Searching for product: " + product);
 		productpages.product_search(product);
-		
-	   }
+	}
 	   
 	@When("User submits the search")
+	@And("User submits the product")
 	public void searchclick() {
 		productpages.search_click();
 	}
 	
-	@Then("Get the number of images displayed")
+	@Then("the number of images displayed should be retrieved")
 	public void num_of_products() {
 		int a = productpages.searchedProducts();	
 		System.out.println("Number of Products:" + a);
 	}
+	
+	@And("User clicks on {string} for the last product")
+	public void view_Prod(String viewProduct) {
+		productpages.viewProducts();
+	}
+	
+	@Then("the product details {string}, {string} and {string} and {int} should be verified.")
+	public void Product_details(String avail, String condi, String brand, int price) {
+		productpages.viewProdDetails(avail, condi, brand, String.valueOf(price));
+
+	}
+	
 }

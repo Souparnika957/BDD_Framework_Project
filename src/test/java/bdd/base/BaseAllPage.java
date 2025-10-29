@@ -4,6 +4,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -13,10 +14,15 @@ public class BaseAllPage {
 	
 	public static WebDriver driver;
 	
+	
+	
 	@Before
 	public void initializeBrowser() {
 		
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-notifications");
+		
+		driver = new ChromeDriver(options);
 		driver.manage().window().maximize();
 		driver.get("https://automationexercise.com/");
 	}
@@ -31,7 +37,7 @@ public class BaseAllPage {
 	}
 
 	public static WebDriver getDriver() {
-		// TODO Auto-generated method stub
+	
 		return driver;
 	}
 
